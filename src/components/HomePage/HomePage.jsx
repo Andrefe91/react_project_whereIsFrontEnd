@@ -5,7 +5,15 @@ import React from "react";
 export default function HomePage() {
     return (
         <>
-            <h2>Hello from the Home Page component</h2>
+            <div className="d-flex flex-column justify-content-center">
+                <div className="display-3 text-center">
+                    Where Is...
+                </div>
+
+                <div className="display-6 text-center">
+                    Can you find all the characters ?
+                </div>
+            </div>
         </>
     )
 }

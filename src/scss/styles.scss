@@ -1,2 +1,33 @@
+//Import Font
+@import url("https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap");
+
+$font-family-base: "Jaro", sans-serif;
+$navbar-light-brand-hover-color: #424242;
+$navbar-light-active-color: red;
+$body-color: #424242;
+
+.navbar a {
+	color: #424242;
+}
+
+.shadow-top {
+	box-shadow: rgba(128, 128, 128, 0.1) 0px -5px 3px;
+}
+
+.main-background {
+	background-image: linear-gradient(
+			rgba(255, 255, 255, 0.9),
+			rgba(255, 255, 255, 0.9)
+		),
+		url("../assets/gameImages/normal_1.jpg");
+}
+
+/* Remove color change and add underline on hover */
+.navbar-nav .nav-link:hover {
+	text-decoration: underline; /* Underline on hover */
+	color: inherit; /* Prevent color change */
+}
+
 // Import all of Bootstrap's CSS
 @import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
