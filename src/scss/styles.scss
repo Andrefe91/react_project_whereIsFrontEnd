@@ -33,6 +33,18 @@ $primary: #424242;
 	border: 1px solid red;
 }
 
+table {
+	border: 1px solid;
+	border-radius: 1rem;
+	color: #424242;
+}
+
+td {
+	text-align: center;
+	color: #424242;
+}
+
+
 // Import all of Bootstrap's CSS
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
