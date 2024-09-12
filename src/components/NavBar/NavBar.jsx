@@ -7,7 +7,7 @@ export default function NavBar() {
 
 	return (
 		<>
-			<nav className="navbar navbar-expand-sm navbar-light bg-light shadow-sm p-1 mb-2 bg-body-tertiary rounded ">
+			<nav className="navbar navbar-expand-sm navbar-light bg-light shadow-sm p-1 bg-body-tertiary rounded ">
 				<div className="container-fluid">
 					<Link to={"/"} className="navbar-brand fs-3">
 						{appTitle}
