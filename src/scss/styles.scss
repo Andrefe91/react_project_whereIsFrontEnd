@@ -5,6 +5,7 @@ $font-family-base: "Jaro", sans-serif;
 $navbar-light-brand-hover-color: #424242;
 $navbar-light-active-color: red;
 $body-color: #424242;
+$primary: #424242;
 
 .navbar a {
 	color: #424242;
@@ -26,6 +27,10 @@ $body-color: #424242;
 .navbar-nav .nav-link:hover {
 	text-decoration: underline; /* Underline on hover */
 	color: inherit; /* Prevent color change */
+}
+
+.border-custom {
+	border: 1px solid red;
 }
 
 // Import all of Bootstrap's CSS
