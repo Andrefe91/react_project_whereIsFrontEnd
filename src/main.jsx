@@ -11,7 +11,8 @@ import Game from './components/Game/Game.jsx'
 import LeaderBoard from './components/LeaderBoard/LeaderBoard.jsx'
 import Rules from './components/Rules/Rules.jsx'
 import About from './components/About/About.jsx'
-
+//Loaders
+import { loader as loaderImage } from './components/Game/Game.jsx'
 
 const router = createBrowserRouter([
   {
@@ -20,8 +21,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: '/', element: <HomePage /> },
-      { path: '/game/:difficulty', element: <Game /> },
-      { path: '/leaderboard', element: <LeaderBoard /> },
+      { path: '/game/:difficulty', element: <Game />, loader: loaderImage },
+      { path: '/leaderboard', element: <LeaderBoard />},
       { path: '/rules', element: <Rules /> },
       { path: '/about', element: <About /> },
     ]

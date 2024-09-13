@@ -1,0 +1,42 @@
+.sticky-bottom {
+	position: fixed;
+	bottom: 5vh;
+    right: 0 ;
+
+}
+
+.sticky-middle {
+    position: fixed;
+    top: 15rem;
+    right: 0;
+}
+
+.character-portrait {
+    border: 5px solid;
+    margin: 0.5rem;
+    cursor: grab;
+
+    &:hover:not(.selected) {
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    }
+}
+
+.portrait-2 {
+    border-color: rgb(37, 190, 201);
+}
+
+.portrait-1 {
+    border-color: rgb(255, 60, 0);
+}
+
+.portrait-0 {
+    border-color: rgb(131, 36, 219);
+}
+
+.invalid {
+    background-color: rgba(255, 88, 88, 0.726);
+}
+
+.selected {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
