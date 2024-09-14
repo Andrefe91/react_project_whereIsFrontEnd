@@ -3,7 +3,6 @@ import React from "react";
 import { PropTypes } from "prop-types";
 
 function GameCharacters({ selected, characters, selectFunction }) {
-	console.log(characters, selected);
 
 	return (
 		<div className="d-flex flex-column card sticky-middle m-2 border-primary border-3">
@@ -11,11 +10,11 @@ function GameCharacters({ selected, characters, selectFunction }) {
 				<div
 					key={index}
 					className={`character-portrait portrait-${index} ${
-						selected === index + 1 && "selected"
+						selected === index && "selected"
 					}`}
 					style={{ borderRadius: "5rem" }}
 
-                    onClick={() => {selectFunction(index+1)}}
+                    onClick={() => {selectFunction(index)}}
 				>
 					<img
 						src={character}
@@ -29,7 +28,7 @@ function GameCharacters({ selected, characters, selectFunction }) {
 }
 
 GameCharacters.propTypes = {
-	selected: PropTypes.number.isRequired,
+	selected: PropTypes.number,
 	characters: PropTypes.array.isRequired,
     selectFunction: PropTypes.func.isRequired,
 };

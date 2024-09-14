@@ -12,7 +12,6 @@
 }
 
 .character-portrait {
-    border: 5px solid;
     margin: 0.5rem;
     cursor: grab;
 
@@ -22,14 +21,17 @@
 }
 
 .portrait-2 {
+    border: 5px solid;
     border-color: rgb(37, 190, 201);
 }
 
 .portrait-1 {
+    border: 5px solid;
     border-color: rgb(255, 60, 0);
 }
 
 .portrait-0 {
+    border: 5px solid;
     border-color: rgb(131, 36, 219);
 }
 
@@ -39,4 +41,13 @@
 
 .selected {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.board-portrait {
+    position: absolute;
+    width: calc(min(10vw, 8rem));
+    height: calc(min(10vw, 8rem));
+    border-radius: calc(min(10vw, 5rem));
+    background-color: rgba(255, 255, 255, 0.589);
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
