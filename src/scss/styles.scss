@@ -44,6 +44,28 @@ td {
 	color: #424242;
 }
 
+.incorrect {
+	animation: blink 3000ms;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+}
+
+.correct {
+	background-color: rgb(196, 255, 191);
+}
+
+@keyframes blink {
+	0% {
+        background-color: rgb(255, 191, 191);
+    }
+    50% {
+        background-color: #ffffff;
+    }
+    100% {
+        background-color: rgb(255, 191, 191);
+    }
+}
+
 // Import all of Bootstrap's CSS
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";

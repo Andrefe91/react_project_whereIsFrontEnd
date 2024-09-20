@@ -2,7 +2,7 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 
-function GameCharacters({ selected, characters, selectFunction }) {
+function GameCharacters({ selected, characters, selectFunction, answerValidation }) {
 
 	return (
 		<>
@@ -12,7 +12,7 @@ function GameCharacters({ selected, characters, selectFunction }) {
 						key={index}
 						className={`character-portrait portrait-${index} ${
 							selected === index && "selected"
-						}`}
+						} ${ answerValidation[index] == false ? "incorrect":""} ${ answerValidation[index] == true ? "correct":""}`}
 						style={{ borderRadius: "5rem" }}
 
 						onClick={() => {selectFunction(index)}}
@@ -25,7 +25,7 @@ function GameCharacters({ selected, characters, selectFunction }) {
 					</div>
 				))}
 			</div>
-			
+
 		</>
 	);
 }
@@ -34,6 +34,7 @@ GameCharacters.propTypes = {
 	selected: PropTypes.number,
 	characters: PropTypes.array.isRequired,
     selectFunction: PropTypes.func.isRequired,
+	answerValidation: PropTypes.array.isRequired,
 };
 
 export default GameCharacters;

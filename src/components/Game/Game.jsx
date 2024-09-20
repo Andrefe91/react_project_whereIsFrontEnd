@@ -54,18 +54,23 @@ export default function Game() {
 	const images = imageSelection(imageDifficulty);
 	const solCoordinates = coordinates[imageDifficulty];
 
+	const [answerValidation, setAnswerValidation] = useState([]);
 	const [selectedCharacter, setSelectedCharacter] = useState(null);
 	const [selectionCoordinates, setSelectionCoordinates] = useState({}); //Selected character coordinates
 	const imageRef = useRef(null);
 
-
-	function checkCoordinates () {
+	function checkCoordinates() {
 		console.log("Checking solution");
-
 		//Calculate if the click is inside the bounding box
-		let validAnswers = checkIfValidCoordinates(selectionCoordinates, solCoordinates);
-		console.log(validAnswers)
-		if (validAnswers.every((value) => value)) {
+		let checkValidAnswers = checkIfValidCoordinates(
+			selectionCoordinates,
+			solCoordinates,
+		);
+
+		setAnswerValidation([...checkValidAnswers]);
+
+		console.log(checkValidAnswers);
+		if (checkValidAnswers.every((value) => value)) {
 			alert("You solved the game!!");
 		}
 	}
@@ -95,16 +100,6 @@ export default function Game() {
 				},
 			});
 		}
-
-		//For debugging purposes:
-		// console.log({
-		// 	relativeX: relativeX,
-		// 	relativeY: relativeY,
-		// 	absoluteX: relativeX * imageWidth + imageStartX,
-		// 	absoluteY: relativeY * imageHeight + imageStartY,
-		// 	imageHeight: imageHeight,
-		// 	imageStartY: imageStartY,
-		// });
 	}
 
 	return (
@@ -116,6 +111,8 @@ export default function Game() {
 					selected={selectedCharacter}
 					characters={images.portraits}
 					selectFunction={setSelectedCharacter}
+					answerValidation={answerValidation}
+
 				/>
 
 				{Object.keys(selectionCoordinates).map((key) => (
@@ -130,7 +127,13 @@ export default function Game() {
 					></div>
 				))}
 
-				<button className="fs-4 check-button m-2 btn btn btn-success" onClick={() => checkCoordinates()} disabled={Object.keys(selectionCoordinates).length < images.portraits.length}>
+				<button
+					className="fs-4 check-button m-2 btn btn btn-success"
+					onClick={() => checkCoordinates()}
+					disabled={
+						Object.keys(selectionCoordinates).length < images.portraits.length
+					}
+				>
 					Check
 				</button>
 
