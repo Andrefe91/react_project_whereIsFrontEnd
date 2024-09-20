@@ -54,6 +54,22 @@ td {
 	background-color: rgb(196, 255, 191);
 }
 
+.clock {
+	animation: clockTick 1000ms;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes clockTick {
+	0% {
+		transform: scale(1);
+	}
+
+	90% {
+		transform: scale(1.1);
+	}
+}
+
 @keyframes blink {
 	0% {
         background-color: rgb(255, 191, 191);
@@ -65,6 +81,8 @@ td {
         background-color: rgb(255, 191, 191);
     }
 }
+
+
 
 // Import all of Bootstrap's CSS
 @import "bootstrap/scss/bootstrap";

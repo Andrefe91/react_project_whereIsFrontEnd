@@ -22,6 +22,8 @@ import difficult_2_c from "../../assets/charactersPortraits/difficult_2/difficul
 //Scripts
 import fetchSolutionRange from "../../scripts/getData";
 import checkIfValidCoordinates from "../../scripts/checkValidCoordinates";
+//Hooks
+import useInterval from "../../hooks/useInterval";
 
 const normal_1_portraits = [normal_1_a, normal_1_b];
 const normal_2_portraits = [normal_2_a, normal_2_b];
@@ -57,6 +59,7 @@ export default function Game() {
 	const [answerValidation, setAnswerValidation] = useState([]);
 	const [selectedCharacter, setSelectedCharacter] = useState(null);
 	const [selectionCoordinates, setSelectionCoordinates] = useState({}); //Selected character coordinates
+	const [count, setCount] = useState(0);
 	const imageRef = useRef(null);
 
 	function checkCoordinates() {
@@ -71,7 +74,7 @@ export default function Game() {
 
 		console.log(checkValidAnswers);
 		if (checkValidAnswers.every((value) => value)) {
-			alert("You solved the game!!");
+			alert(`You solved the game!! in ${count} seconds`);
 		}
 	}
 
@@ -102,10 +105,15 @@ export default function Game() {
 		}
 	}
 
+	useInterval(() => {
+		//your custom logic here
+		setCount(count + 1);
+	}, 1000)
+
 	return (
 		<>
 			<div className="min-vw-100">
-				<GameInfo imageDifficulty={imageDifficulty} time="00:00:00" />
+				<GameInfo imageDifficulty={imageDifficulty} time={count} />
 
 				<GameCharacters
 					selected={selectedCharacter}
