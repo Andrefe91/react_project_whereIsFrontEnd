@@ -1,6 +1,7 @@
 //Modules
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
+import { generateApiKey } from "generate-api-key";
 //Components
 import GameInfo from "../GameInfo/GameInfo";
 import GameCharacters from "../GameCharacters/GameCharacters";
@@ -59,8 +60,10 @@ export default function Game() {
 	const [answerValidation, setAnswerValidation] = useState([]);
 	const [selectedCharacter, setSelectedCharacter] = useState(null);
 	const [selectionCoordinates, setSelectionCoordinates] = useState({}); //Selected character coordinates
-	const [count, setCount] = useState(0);
+	const [gameRegistered, setGameRegistered] = useState(false);
+	const [secondCount, setSecondCount] = useState(0);
 	const imageRef = useRef(null);
+	const gameKey = useRef(generateApiKey({ method: "string", length: 10 })); //This key identify the user of the game
 
 	function checkCoordinates() {
 		console.log("Checking solution");
@@ -72,9 +75,9 @@ export default function Game() {
 
 		setAnswerValidation([...checkValidAnswers]);
 
-		console.log(checkValidAnswers);
+
 		if (checkValidAnswers.every((value) => value)) {
-			alert(`You solved the game!! in ${count} seconds`);
+			alert(`You solved the game!! in ${secondCount} seconds`);
 		}
 	}
 
@@ -105,22 +108,52 @@ export default function Game() {
 		}
 	}
 
-	useInterval(() => {
-		//your custom logic here
-		setCount(count + 1);
-	}, 1000)
+	useEffect(() => {
+		const registerGame = async () => {
+			//Register game attempt to the server
+
+			try {
+				let response = await fetch("http://127.0.0.1:3000/attempts", {
+					method: "POST",
+					headers: new Headers({ "content-type": "application/json" }),
+					body: JSON.stringify({
+						identifier: gameKey.current,
+						resolved: false,
+					}),
+				});
+
+				if (response.ok) {
+					console.log("Game registered, starts now", response);
+					setGameRegistered(true);
+				} else {
+					console.error("Network Error", response);
+				}
+			} catch (error) {
+				console.error("Error registering game: ", error);
+			}
+		};
+
+		registerGame();
+	}, []);
+
+	//When the game is correctly registered in the backend, start the counter.
+	useInterval(
+		() => {
+			setSecondCount(secondCount + 1);
+		},
+		gameRegistered ? 1000 : null,
+	);
 
 	return (
 		<>
 			<div className="min-vw-100">
-				<GameInfo imageDifficulty={imageDifficulty} time={count} />
+				<GameInfo imageDifficulty={imageDifficulty} time={secondCount} />
 
 				<GameCharacters
 					selected={selectedCharacter}
 					characters={images.portraits}
 					selectFunction={setSelectedCharacter}
 					answerValidation={answerValidation}
-
 				/>
 
 				{Object.keys(selectionCoordinates).map((key) => (
