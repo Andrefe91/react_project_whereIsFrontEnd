@@ -2,8 +2,13 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 
-function GameCharacters({ selected, characters, selectFunction, answerValidation }) {
-
+function GameCharacters({
+	selected,
+	characters,
+	selectFunction,
+	answerValidation,
+	gameRegistered,
+}) {
 	return (
 		<>
 			<div className="d-flex flex-column card sticky-middle m-2 border-primary border-3">
@@ -12,10 +17,13 @@ function GameCharacters({ selected, characters, selectFunction, answerValidation
 						key={index}
 						className={`character-portrait portrait-${index} ${
 							selected === index && "selected"
-						} ${ answerValidation[index] == false ? "incorrect":""} ${ answerValidation[index] == true ? "correct":""}`}
+						} ${answerValidation[index] == false ? "incorrect" : ""} ${
+							answerValidation[index] == true ? "correct" : ""
+						} ${!gameRegistered && "disabled-element"}`} //To disabled the buttons if no count is in progress
 						style={{ borderRadius: "5rem" }}
-
-						onClick={() => {selectFunction(index)}}
+						onClick={() => {
+							selectFunction(index);
+						}}
 					>
 						<img
 							src={character}
@@ -25,7 +33,6 @@ function GameCharacters({ selected, characters, selectFunction, answerValidation
 					</div>
 				))}
 			</div>
-
 		</>
 	);
 }
@@ -33,8 +40,9 @@ function GameCharacters({ selected, characters, selectFunction, answerValidation
 GameCharacters.propTypes = {
 	selected: PropTypes.number,
 	characters: PropTypes.array.isRequired,
-    selectFunction: PropTypes.func.isRequired,
+	selectFunction: PropTypes.func.isRequired,
 	answerValidation: PropTypes.array.isRequired,
+	gameRegistered: PropTypes.func.isRequired,
 };
 
 export default GameCharacters;

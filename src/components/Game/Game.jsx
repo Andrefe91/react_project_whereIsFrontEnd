@@ -5,6 +5,7 @@ import { generateApiKey } from "generate-api-key";
 //Components
 import GameInfo from "../GameInfo/GameInfo";
 import GameCharacters from "../GameCharacters/GameCharacters";
+import ResolvedModal from "../ResolvedModal/ResolvedModal";
 //Assets
 import normal_1 from "../../assets/gameImages/normal_1.jpg";
 import normal_2 from "../../assets/gameImages/normal_2.jpg";
@@ -60,8 +61,10 @@ export default function Game() {
 	const [answerValidation, setAnswerValidation] = useState([]);
 	const [selectedCharacter, setSelectedCharacter] = useState(null);
 	const [selectionCoordinates, setSelectionCoordinates] = useState({}); //Selected character coordinates
-	const [gameRegistered, setGameRegistered] = useState(false);
-	const [secondCount, setSecondCount] = useState(0);
+	const [gameRegistered, setGameRegistered] = useState(false); //Help to track if the game has been solved to stop the clock
+	const [secondsCount, setSecondsCount] = useState(0); //Traks the time of the game
+	const [modalVisibility, setModalVisibility] = useState(false); //Control the visibility of the modal
+	const finishTime = useRef(0);
 	const imageRef = useRef(null);
 	const gameKey = useRef(generateApiKey({ method: "string", length: 10 })); //This key identify the user of the game
 
@@ -75,12 +78,44 @@ export default function Game() {
 
 		setAnswerValidation([...checkValidAnswers]);
 
-
 		if (checkValidAnswers.every((value) => value)) {
-			alert(`You solved the game!! in ${secondCount} seconds`);
+			//Set the time value in a hook so it doesnt get modified during re render
+			finishTime.current = secondsCount;
+
+			//Deactivate the button by erasing the selected coordinates
+			setSelectionCoordinates({});
+			setSelectedCharacter(null);
+
+			//Register the solution to the backend
+			const registerSolution = async () => {
+				try {
+					let response = await fetch("http://127.0.0.1:3000/attempts/1", {
+						method: "PUT",
+						headers: new Headers({ "content-type": "application/json" }),
+						body: JSON.stringify({
+							identifier: gameKey.current,
+							resolved: true,
+							time: secondsCount,
+						}),
+					});
+
+					if (response.ok) {
+						console.log("Solution registered, well done!", response);
+						setGameRegistered(false);
+						setModalVisibility(true);
+					} else {
+						console.error("Network Error", response);
+					}
+				} catch (error) {
+					console.error("Error registering the finished game: ", error);
+				}
+			};
+
+			registerSolution();
 		}
 	}
 
+	//
 	function printFromClick(event) {
 		//Get the image size
 		const imageRect = imageRef.current?.getBoundingClientRect();
@@ -111,7 +146,6 @@ export default function Game() {
 	useEffect(() => {
 		const registerGame = async () => {
 			//Register game attempt to the server
-
 			try {
 				let response = await fetch("http://127.0.0.1:3000/attempts", {
 					method: "POST",
@@ -123,7 +157,7 @@ export default function Game() {
 				});
 
 				if (response.ok) {
-					console.log("Game registered, starts now", response);
+					console.log("Game registered, starts now!", response);
 					setGameRegistered(true);
 				} else {
 					console.error("Network Error", response);
@@ -139,7 +173,7 @@ export default function Game() {
 	//When the game is correctly registered in the backend, start the counter.
 	useInterval(
 		() => {
-			setSecondCount(secondCount + 1);
+			setSecondsCount(secondsCount + 1);
 		},
 		gameRegistered ? 1000 : null,
 	);
@@ -147,13 +181,22 @@ export default function Game() {
 	return (
 		<>
 			<div className="min-vw-100">
-				<GameInfo imageDifficulty={imageDifficulty} time={secondCount} />
+				{modalVisibility && (
+					<ResolvedModal
+						gameKey={gameKey.current}
+						time={finishTime.current}
+						visibilityFunction={setModalVisibility}
+					/>
+				)}
+
+				<GameInfo imageDifficulty={imageDifficulty} time={secondsCount} />
 
 				<GameCharacters
 					selected={selectedCharacter}
 					characters={images.portraits}
 					selectFunction={setSelectedCharacter}
 					answerValidation={answerValidation}
+					gameRegistered = {gameRegistered}
 				/>
 
 				{Object.keys(selectionCoordinates).map((key) => (

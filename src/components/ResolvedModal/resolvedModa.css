@@ -1,0 +1,8 @@
+.resolved-modal {
+    position: fixed;
+    outline: 2px solid #424242;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    z-index: 1;
+}

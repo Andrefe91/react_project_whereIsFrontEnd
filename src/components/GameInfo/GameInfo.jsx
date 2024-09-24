@@ -22,7 +22,7 @@ function GameInfo({imageDifficulty, time}) {
 
 GameInfo.propTypes = {
     imageDifficulty: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
-}
+    time: PropTypes.number.isRequired,
+};
 
 export default GameInfo;

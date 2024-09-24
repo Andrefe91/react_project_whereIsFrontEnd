@@ -60,6 +60,13 @@ td {
 	animation-timing-function: ease-in-out;
 }
 
+.disabled-element {
+	pointer-events: none;
+	cursor: default;
+}
+
+
+
 @keyframes clockTick {
 	0% {
 		transform: scale(1);
