@@ -42,7 +42,7 @@ GameCharacters.propTypes = {
 	characters: PropTypes.array.isRequired,
 	selectFunction: PropTypes.func.isRequired,
 	answerValidation: PropTypes.array.isRequired,
-	gameRegistered: PropTypes.func.isRequired,
+	gameRegistered: PropTypes.bool.isRequired,
 };
 
 export default GameCharacters;

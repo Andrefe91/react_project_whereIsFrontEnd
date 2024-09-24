@@ -26,7 +26,7 @@ function ResolvedModal({ gameKey, time, visibilityFunction }) {
 					identifier: gameKey,
 					resolved: true,
 					time: time,
-					name: name,
+					name: name.toUpperCase(),
 				}),
 			});
 

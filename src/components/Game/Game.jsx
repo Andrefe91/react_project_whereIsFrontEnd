@@ -152,7 +152,7 @@ export default function Game() {
 					headers: new Headers({ "content-type": "application/json" }),
 					body: JSON.stringify({
 						identifier: gameKey.current,
-						resolved: false,
+						difficulty: imageDifficulty,
 					}),
 				});
 
