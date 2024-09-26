@@ -12,6 +12,7 @@ ResolvedModal.propTypes = {
 
 function ResolvedModal({ gameKey, time, visibilityFunction }) {
 	const [name, setName] = useState("");
+	const URL = "https://rails-project-whereisbackendtwo.fly.dev";
 
 	function changeName(event) {
 		setName(event.target.value);
@@ -19,7 +20,7 @@ function ResolvedModal({ gameKey, time, visibilityFunction }) {
 
 	async function handleSubmit() {
 		try {
-			let response = await fetch("http://127.0.0.1:3000/attempts/1", {
+			let response = await fetch(`${URL}/attempts/1`, {
 				method: "PUT",
 				headers: new Headers({ "content-type": "application/json" }),
 				body: JSON.stringify({
@@ -34,7 +35,7 @@ function ResolvedModal({ gameKey, time, visibilityFunction }) {
 				console.log("Score submitted successfully!");
 				visibilityFunction(false);
 			} else {
-				console.error(`Network Error: ${response.status}`);
+				console.error(`Network Error submitting score: ${response.status}`);
 			}
 		} catch (e) {
 			console.error(`Error submitting score: ${e.message}`);

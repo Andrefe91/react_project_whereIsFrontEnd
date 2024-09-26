@@ -4,7 +4,7 @@ import { setCache , getCache } from "./cache.js";
 
 //API Endpoint for the BackEnd server
 export default async function fetchSolutionRange() {
-    const url = "http://127.0.0.1:3000/characterCoordinates.json";
+    const url = "https://rails-project-whereisbackendtwo.fly.dev/characterCoordinates.json";
 
     try {
         const cache = await getCache();
@@ -13,7 +13,11 @@ export default async function fetchSolutionRange() {
             return cache;
         }
 
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            mode: "cors",
+            method: "GET",
+            credentials: 'include',
+        });
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

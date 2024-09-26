@@ -57,6 +57,7 @@ export default function Game() {
 	const { imageDifficulty, coordinates } = useLoaderData();
 	const images = imageSelection(imageDifficulty);
 	const solCoordinates = coordinates[imageDifficulty];
+	const URL = "https://rails-project-whereisbackendtwo.fly.dev";
 
 	const [answerValidation, setAnswerValidation] = useState([]);
 	const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -89,7 +90,7 @@ export default function Game() {
 			//Register the solution to the backend
 			const registerSolution = async () => {
 				try {
-					let response = await fetch("http://127.0.0.1:3000/attempts/1", {
+					let response = await fetch(`${URL}/attempts/1`, {
 						method: "PUT",
 						headers: new Headers({ "content-type": "application/json" }),
 						body: JSON.stringify({
@@ -104,7 +105,7 @@ export default function Game() {
 						setGameRegistered(false);
 						setModalVisibility(true);
 					} else {
-						console.error("Network Error", response);
+						console.error("Network Error registering the finished game", response);
 					}
 				} catch (error) {
 					console.error("Error registering the finished game: ", error);
@@ -147,7 +148,7 @@ export default function Game() {
 		const registerGame = async () => {
 			//Register game attempt to the server
 			try {
-				let response = await fetch("http://127.0.0.1:3000/attempts", {
+				let response = await fetch(`${URL}/attempts`, {
 					method: "POST",
 					headers: new Headers({ "content-type": "application/json" }),
 					body: JSON.stringify({
@@ -160,7 +161,7 @@ export default function Game() {
 					console.log("Game registered, starts now!", response);
 					setGameRegistered(true);
 				} else {
-					console.error("Network Error", response);
+					console.error("Network Error registering the game", response);
 				}
 			} catch (error) {
 				console.error("Error registering game: ", error);
