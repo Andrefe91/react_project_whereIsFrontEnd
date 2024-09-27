@@ -33,7 +33,10 @@ const difficult_1_portraits = [difficult_1_a, difficult_1_b, difficult_1_c];
 const difficult_2_portraits = [difficult_2_a, difficult_2_b, difficult_2_c];
 
 export async function loader({ params }) {
-	const coordinates = await fetchData();
+	const coordinates = await fetchData(
+		"https://rails-project-whereisbackendtwo.fly.dev/characterCoordinates.json",
+		"solutionCache",
+	);
 	const imageDifficulty = params.difficulty;
 	return { imageDifficulty, coordinates };
 }
@@ -63,7 +66,7 @@ export default function Game() {
 	const [selectedCharacter, setSelectedCharacter] = useState(null);
 	const [selectionCoordinates, setSelectionCoordinates] = useState({}); //Selected character coordinates
 	const [gameRegistered, setGameRegistered] = useState(false); //Help to track if the game has been solved to stop the clock
-	const [secondsCount, setSecondsCount] = useState(0); //Traks the time of the game
+	const [secondsCount, setSecondsCount] = useState(0); //Track the time of the game
 	const [modalVisibility, setModalVisibility] = useState(false); //Control the visibility of the modal
 	const finishTime = useRef(0);
 	const imageRef = useRef(null);
@@ -105,7 +108,10 @@ export default function Game() {
 						setGameRegistered(false);
 						setModalVisibility(true);
 					} else {
-						console.error("Network Error registering the finished game", response);
+						console.error(
+							"Network Error registering the finished game",
+							response,
+						);
 					}
 				} catch (error) {
 					console.error("Error registering the finished game: ", error);
@@ -197,7 +203,7 @@ export default function Game() {
 					characters={images.portraits}
 					selectFunction={setSelectedCharacter}
 					answerValidation={answerValidation}
-					gameRegistered = {gameRegistered}
+					gameRegistered={gameRegistered}
 				/>
 
 				{Object.keys(selectionCoordinates).map((key) => (

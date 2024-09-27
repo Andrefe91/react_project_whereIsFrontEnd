@@ -1,8 +1,8 @@
 import localforage from "localforage";
 
-async function setCache(object) {
+async function setCache(object, cacheName) {
     try {
-        await localforage.setItem("solutionCache", object);
+        await localforage.setItem(cacheName, object);
         console.log("Cache saved");
     } catch (error) {
         console.log(`There was an error saving the cache: ${error}`);
@@ -10,9 +10,11 @@ async function setCache(object) {
 }
 
 
-async function getCache() {
+async function getCache(cacheName) {
+    // console.log("Clearing cache...");
+    // localforage.clear() //Clear the cache for development purposes
     try {
-        const cache = await localforage.getItem("solutionCache");
+        const cache = await localforage.getItem(cacheName);
 
         if (!cache) { //In the given case that the cache is empty
             console.log("Cache is empty");
