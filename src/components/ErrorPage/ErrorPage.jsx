@@ -7,7 +7,7 @@ export default function ErrorPage() {
   console.error(error);
 
   return (
-    <div >
+    <div className=" card position-absolute top-50 start-50 p-4" style={{transform: "translate(-50%, -50%)"}} >
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
       <p>
