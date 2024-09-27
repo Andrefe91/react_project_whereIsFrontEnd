@@ -4,7 +4,7 @@ import React from "react";
 export default function FootNote() {
 	return (
 		<>
-			<footer className="bg-body-tertiary p-2 shadow-top">
+			<footer className="bg-body-tertiary p-2 shadow-top footer">
 				<div className="fs-5">
 					This was made with{" "}
 					<i className="bi bi-heart-fill" style={{ color: "#cf4c4c" }}></i> for{" "}
