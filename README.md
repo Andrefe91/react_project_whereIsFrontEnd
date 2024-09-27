@@ -8,6 +8,7 @@ This project is the frontend of a "Where's Waldo" style game, created as part of
 - [Tech Stack](#tech-stack)
 - [Game Logic](#game-logic)
 - [Challenges Faced](#challenges-faced)
+- [BackEnd Repository](#backend-repository)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -47,6 +48,9 @@ The game presents a large image with hidden characters that players need to find
 
 - **CORS Issues:** Integrating the backend and frontend involved troubleshooting CORS errors to ensure seamless data flow between the two applications.
 
+## BackEnd Repository
+
+You can find the repository in this [GitHub Link](https://github.com/Andrefe91/rails_project_whereIsBackEndTwo)
 
 ## Contributing
 
