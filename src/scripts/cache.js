@@ -11,8 +11,6 @@ async function setCache(object) {
 
 
 async function getCache() {
-    console.log("Clearing cache...");
-    localforage.clear() //Clear the cache for development purposes
     try {
         const cache = await localforage.getItem("solutionCache");
 

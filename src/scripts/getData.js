@@ -3,7 +3,7 @@ import { setCache , getCache } from "./cache.js";
 //This fetches the Json file from the API server
 
 //API Endpoint for the BackEnd server
-export default async function fetchSolutionRange() {
+export default async function fetchData() {
     const url = "https://rails-project-whereisbackendtwo.fly.dev/characterCoordinates.json";
 
     try {
@@ -14,18 +14,18 @@ export default async function fetchSolutionRange() {
         }
 
         const response = await fetch(url, {
-            mode: "cors",
-            method: "GET",
-            credentials: 'include',
+            // mode: "cors",
+            // method: "GET",
+            // credentials: 'include',
         });
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const solutionRange = await response.json();
-        await setCache( solutionRange );
-        return solutionRange;
+        const responseJason = await response.json();
+        await setCache( responseJason );
+        return responseJason;
     } catch (error) {
         console.error(`Error fetching items: ${error.message}`);
         throw error;

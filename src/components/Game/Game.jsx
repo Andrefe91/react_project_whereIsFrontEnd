@@ -22,7 +22,7 @@ import difficult_2_a from "../../assets/charactersPortraits/difficult_2/difficul
 import difficult_2_b from "../../assets/charactersPortraits/difficult_2/difficult_2_b.svg";
 import difficult_2_c from "../../assets/charactersPortraits/difficult_2/difficult_2_c.svg";
 //Scripts
-import fetchSolutionRange from "../../scripts/getData";
+import fetchData from "../../scripts/getData";
 import checkIfValidCoordinates from "../../scripts/checkValidCoordinates";
 //Hooks
 import useInterval from "../../hooks/useInterval";
@@ -33,7 +33,7 @@ const difficult_1_portraits = [difficult_1_a, difficult_1_b, difficult_1_c];
 const difficult_2_portraits = [difficult_2_a, difficult_2_b, difficult_2_c];
 
 export async function loader({ params }) {
-	const coordinates = await fetchSolutionRange();
+	const coordinates = await fetchData();
 	const imageDifficulty = params.difficulty;
 	return { imageDifficulty, coordinates };
 }
