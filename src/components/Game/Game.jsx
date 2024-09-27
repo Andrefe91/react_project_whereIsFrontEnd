@@ -89,6 +89,7 @@ export default function Game() {
 			//Deactivate the button by erasing the selected coordinates
 			setSelectionCoordinates({});
 			setSelectedCharacter(null);
+			setGameRegistered(false); //Stops the counter
 
 			//Register the solution to the backend
 			const registerSolution = async () => {
@@ -105,7 +106,6 @@ export default function Game() {
 
 					if (response.ok) {
 						console.log("Solution registered, well done!", response);
-						setGameRegistered(false);
 						setModalVisibility(true);
 					} else {
 						console.error(

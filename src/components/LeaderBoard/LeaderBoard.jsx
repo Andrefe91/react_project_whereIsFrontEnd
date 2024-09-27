@@ -22,7 +22,7 @@ export default function LeaderBoard() {
 		<>
 			<Suspense fallback={<Loading />}>
 				<div
-					className="d-flex flex-column justify-content-center"
+					className="d-flex flex-column justify-content-center m-5"
 					style={{ width: "calc(min(90vw, 40rem))" }}
 				>
 					<table className="table fs-3 table-striped table-hover table-bordered table-fixed border-primary border-3 shadow">
